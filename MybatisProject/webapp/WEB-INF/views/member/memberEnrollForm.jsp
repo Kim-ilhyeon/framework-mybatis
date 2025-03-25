@@ -11,6 +11,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <!-------------------->
 
+<style>
+	#mem-enroll-area {
+		margin: auto;
+	}
+</style>
+
 </head>
 <body>
 	<tr%-- menubar.jsp 포함 --%>
@@ -22,7 +28,7 @@
 
 		<h2 align="center">회원가입</h2>
 
-		<form action="" method="post">
+		<form action="insert.me" method="post" id="mem-enroll-area">
 			<table align="center">
 				<tr>
 					<td>* 아이디</td>
