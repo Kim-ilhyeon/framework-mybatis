@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+	DOCTYPE : 문서유형, 설정된 값으로 전체를 감싸는 태그로 구성
+	DTD : 유효성 검사
+-->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  <!-- configuration : 환경 설정 -->
+<configuration>
+	<!-- invironment : mybatis에서 연동할 DB 정보를 작성하는 영역 -->
+	<enviroments default="develop">
+	<!--  deault 속성 : 여러 개 설정 중 기본값에 대한 설정 -->
+	
+	<!--  environment : DB정보 설정 -->
+	<invironment id="develop">
+		<!-- 
+			transactionManger : 트랜잭션 처리에 대한 설정
+			* type 속성 : JDBC / MANAGER
+			  - JDBC : 트랜잭션 처리를 직접관리 (수동commit)
+			  - MANAGER : 트랜잭션 처리에 관여하지 않음 (자동 commit)
+		 -->
+		<transactionMabager type="JDBC"/>
+		
+		<!-- 
+			dataSource : DB 정보를 하위요소로 가지는 설정
+						 ConnectionPool을 사용여부 설정
+			* type 속성 : POOLED / UNPOOLED
+			  - POOLED : ConnectionPool 사용
+			  - UNPOOLED : ConnectionPool 사용하지 않음
+			  => ConnectionPool ? Connection 객체를 보관할 수 있는 영역
+			  						한번 생성된 Connection 객체를 담아두고 재사용
+		-->
+		<dataSource type="POOLED">
+		
+			<property name="driver" value="oracl.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="username" value="C##MYBATIS"/>
+			<property name="password" value="MYBATIS"/>
+			
+			
+		</dataSource>
+	</invironment>
+	
+	</enviroments>
+</configuration>

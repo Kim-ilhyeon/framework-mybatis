@@ -1,0 +1,3 @@
+2025-03-25 09:17:21,580 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-03-25 09:36:49,150 [Worker-39: https://www.codetogether.com/updates/ci/compositeContent.jar] WARN  o.a.h.c.h.p.ResponseProcessCookies - ex-0000000072 Cookie rejected [_cfuvid="c9Ng3kQEelSqrwyRfgTxnQ7sWMZ2igJPz9EDLaeN4Ts-1742863008050-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+2025-03-25 11:50:30,457 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
