@@ -48,7 +48,7 @@
 				<tr>
 					<td>* 비밀번호 확인</td>
 					<td>
-						<input type="password" class="form-control" required>
+						<input type="password" class="form-control" id="userPwdCheck" required>
 					</td>
 				</tr>
 				<tr>
@@ -84,13 +84,14 @@
 				<tr>
 					<td>&nbsp;&nbsp;생년월일</td>
 					<td>
-						<input type="date" class="form-control" name="birthday">
+						<input type="date" class="form-control" onchange="makeBirth(this);"/>
+						<input type="hidden" name="birthday"/>
 					</td>
 				</tr>
 				<tr>
 					<td>&nbsp;&nbsp;연락처</td>
 					<td>
-						<input type="tel" class="form-control" name="phone" placeholder="- 포함하여 작성하시오.">
+						<input type="tel" class="form-control" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="- 포함하여 작성하시오."/>
 					</td>
 				</tr>
 				<tr>
@@ -103,12 +104,86 @@
 			<br><br>
 
 			<div align="center">
-				<button class="btn btn-primary" type="submit">회원가입</button>
+				<button class="btn btn-primary" type="submit" onclick="return checkPwd();">회원가입</button>
 				<button class="btn btn-danger" type="reset">초기화</button>
 			</div>
 
 		</form>
 
 	</div>
+	
+	<script>
+		function makeBirth(target) {
+			// 입력된 값 가져오기
+			const data = target.value;
+			// document.getElementById("아이디 값")
+			// document.querySelector("선택자")
+			
+			// document.getElementsClassName("클래스명")
+			// document.querySelectorAll("선택자")
+			
+			console.log(data);
+			
+			// yyyy-mm-dd 형식에서 yymmdd 형식으로 변경
+			// (1) Date 객체 사용
+			const birth = new Date(data);
+			
+			console.log(birth);
+			
+			let yy = birth.getFullYear() % 100;
+			let mm = ("0" + (birth.getMonth() + 1)).slice(-2);
+			let dd = ("0" + birth.getDate()).slice(-2);
+			
+			console.log(yy, mm, dd);
+			
+			// (2) String 객체 메소드 사용 => split 메소드
+			const dArr = data.split('-'); // ['yyyy', 'mm', 'dd']
+			yy = dArr[0].slice(-2);
+			mm = dArr[1];
+			dd = dArr[2];
+			
+			console.log(yy, mm, dd);
+			
+			console.log(yy+mm+dd);
+			
+			// yy, mm, dd 를 하나로 합쳐서 name 속성이 birthday인 요소에 값을 저장
+			document.querySelector("#mem-enroll-area input[name=birthday]").value = yy+mm+dd;
+			
+		}
+		/*
+		const makeBirrth = (target) => {
+			
+		}
+		*/
+		
+		
+		// 입력된 '비밀번호' 값과 '비밀번호 확인' 값이 같을 경우 true
+		// 다를 경우 false 를 리턴
+		function checkPwd() {
+			// 비밀번호 입력 값 --> name = userPwd
+			const userP = document.querySelector("#mem-enroll-area input[name=userPwd]").value;
+			
+			// 비밀번호 확인 입력값 --> id = userPwdCheck
+			const userPC = document.getElementById("userPwdCheck").value;
+			
+			// console.log(userP, userPC);
+			
+			// 두 값이 다를 경우 false 리턴
+			if (userP != userPC) {
+				alert("비밀번호와 비밀번호 확인 입력값이 다릅니다.");
+				return false;
+			}			
+		}
+		
+//		function makePhone(target) {
+//			const data = target.value;
+//			
+//			console.log(data);
+//			
+//			if (!data.includes('-')) {
+//				data.replace()
+//			}
+//		}
+	</script>
 </body>
 </html>

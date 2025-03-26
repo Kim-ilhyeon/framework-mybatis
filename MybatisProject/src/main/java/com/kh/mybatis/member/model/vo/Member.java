@@ -24,6 +24,24 @@ public class Member {
 		super();
 	}
 	
+	// * 정보 수정 시 추가한 생성자 (매개변수 5개)
+	public Member(String userId, String email, String gender, String phone, String address) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+	}
+
+	// * 로그인 시 추가한 생성자(매개변수 2개)
+	public Member(String userId, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
+
+
 	// * 회원가입 시 추가한 생성자 (매개변수 8개)
 	public Member(String userId, String userPwd, String userName, String email, String gender, String birthday,
 			String phone, String address) {
