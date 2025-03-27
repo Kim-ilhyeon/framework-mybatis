@@ -61,10 +61,22 @@
         WHERE USER_ID = #{ userId } AND USER_PWD = #{ userPwd } AND STATUS = 'Y'
 	</select>
 	
-	<update id="updateMember" parameterType="Member">
+	<update id="updateMember" >
 		UPDATE MEMBER
-   			SET EMAIL = #{ email }, GENDER = #{ gender }, PHONE = #{ phone }, ADDRESS = #{ address }
-		WHERE USER_ID = #{ userId }
+   			SET EMAIL = #{ email }, GENDER = #{ gender }, PHONE = #{ phone }, ADDRESS = #{ address }, MODIFY_DATE = SYSDATE
+		WHERE USER_ID = #{ userId } AND STATUS = 'Y'
+	</update>
+	
+	<update id="deleteMember" >
+		UPDATE MEMBER
+			SET STATUS = 'N', MODIFY_DATE = SYSDATE
+		WHERE USER_ID = #{ userId } AND USER_PWD = #{ userPwd }
+	</update>
+	
+	<update id="updatePassword">
+		UPDATE MEMBER
+			SET USER_PWD = #{ newPwd }, MODIFY_DATE = SYSDATE
+		WHERE USER_ID = #{ userId } AND USER_PWD = #{ userPwd } AND STATUS = 'Y'
 	</update>
 	
 	

@@ -91,13 +91,79 @@
 
 			<div align="center">
 				<button type="submit" class="btn btn-primary">정보 수정</button>
-				<button type="button" class="btn btn-secondary">비밀번호 변경</button>
-				<button type="button" class="btn btn-danger">회원 탈퇴</button>
+				<button type="button" class="btn btn-secondary"
+						data-bs-toggle="modal" data-bs-target="#updatePwdModal">비밀번호 변경</button>
+				
+				<button type="button" class="btn btn-danger" 
+						data-bs-toggle="modal" data-bs-target="#deleteMemModal" >회원 탈퇴</button>
 			</div>
 
 		</form>
 
 	</div>
+	
+	<!-- 회원 비밀번호 변경 모달(modal -->
+	<div class="modal fade" id="updatePwdModal" aria-labelledby="updatePwdModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="updatePwdModal">비밀번호 변경</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form action="updatePwd.me" method="post">
+        
+        	<input type="hidden" name="userId" value="${ loginUser.userId }"/>
+        
+        	<div class="mb-3">
+            	<label for="passward" class="col-form-label">현재 비밀번호 :</label>
+            	<input type="passward" class="form-control" id="passward" name="userPwd"/>
+          	</div>
+          	<div class="mb-3">
+            	<label for="passwardUpdate" class="col-form-label">변경할 비밀번호 :</label>
+            	<input type="text" class="form-control" id="passwardUpdate" name="newPwd">
+          	</div>
+          	<div class="mb-3">
+            	<label for="passwardCheck" class="col-form-label">변경할 비밀번호 확인 :</label>
+            	<input type="text" class="form-control" id="passwardCheck">
+          	</div>
+         	 	<button type="submit" class="btn btn-sm btn-warning float-end" onclick="return checkPwd();">비밀번호 변경</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+	
+	<!-- 회원 탈퇴 모달(modal) -->
+	<div class="modal fade" id="deleteMemModal" tabindex="-1" aria-labelledby="deleteMemModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="deleteMemModal">회원 탈퇴</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="delete.me" method="post">
+        	<%-- 회원ID  : 따로 입력받지 않을 것임 (전달만) --%>
+        	<input type="hidden" name="userId" value="${ loginUser.userId }" />
+        	<p>
+        		탈퇴 후 복구가 불가능 합니다. <br>
+        		그래도 탈퇴 하시겠습니까?
+        	</p>
+        	<%-- 회원PWD : 입력받기 --%>
+        	<div class="mb-3">
+        		<label for="password" class="col-form-label">비밀번호 :</label>
+        		<input type="password" id="password" class="form-control" name="userPwd" required/>
+        	</div>
+        	
+        	<button type="submit" class="btn btn-sm btn-danger float-end">탈퇴하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 	
 	<script>
 		// * 모든 요소들이 로드되었을 때 (화면에 표시되었을 때)
@@ -145,6 +211,33 @@
 			// yy, mm, dd 를 하나로 합쳐서 name 속성이 birthday인 요소에 값을 저장
 			document.querySelector("#my-page-area input[name=birthday]").value = yy+mm+dd;
 			
+		}
+		
+		// 입력된 '비밀번호' 값과 '비밀번호 확인' 값이 같을 경우 true
+		// 다를 경우 false 를 리턴
+		function checkPwd() {
+			// 변경할 비밀번호 입력 값 --> name = userPwd
+			const newPwd = document.querySelector("#updatePwdModal #passwardUpdate").value;
+			
+			// 변경할 비밀번호 확인 입력값 --> id = userPwdCheck
+			const newPwdC = document.querySelector("#updatePwdModal #passwardCheck").value;
+			
+			// console.log(newPwd, newPwdC);
+			
+			// * 모두 입력되지 않았을 때 변경 요청하지 않도록 처리
+			const userPwd = document.querySelector("#updatePwdModal #passward").value;
+			
+			if (userPwd == "" || newPwd == "" || newPwdC== "") {
+				alert("입력되지 않은 값이 있습니다. 확인해주세요.");
+				return false;
+			}
+			// => 입력 input요소에 required 속성을 추가해도됨
+			
+			// 두 값이 다를 경우 false 리턴
+			if (newPwd != newPwdC) {
+				alert("변경할 비밀번호와 비밀번호 확인값이 다릅니다. 다시 확인해주세요.");
+				return false;
+			}			
 		}
 	</script>
 </body>
